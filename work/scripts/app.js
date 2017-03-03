@@ -45,19 +45,19 @@
   });
 
   document.getElementById('butAddCity').addEventListener('click', function() {
-      // Add the newly selected city
-      var select = document.getElementById('selectCityToAdd');
-      var selected = select.options[select.selectedIndex];
-      var key = selected.value;
-      var label = selected.textContent;
-      if (!app.selectedCities) {
-        app.selectedCities = [];
-      }
-      app.getForecast(key, label);
-      app.selectedCities.push({key: key, label: label});
-      app.saveSelectedCities();
-      app.toggleAddDialog(false);
-    });
+    // Add the newly selected city
+    var select = document.getElementById('selectCityToAdd');
+    var selected = select.options[select.selectedIndex];
+    var key = selected.value;
+    var label = selected.textContent;
+    if (!app.selectedCities) {
+      app.selectedCities = [];
+    }
+    app.getForecast(key, label);
+    app.selectedCities.push({key: key, label: label});
+    app.saveSelectedCities();
+    app.toggleAddDialog(false);
+  });
 
   document.getElementById('butAddCancel').addEventListener('click', function() {
     // Close the add new city dialog
@@ -169,7 +169,6 @@
     var url = 'https://query.yahooapis.com/v1/public/yql?format=json&q=' +
         statement;
     // TODO add cache logic here
-
     if ('caches' in window) {
       /*
        * Check if the service worker has already cached this city's weather
@@ -188,7 +187,6 @@
         }
       });
     }
-
     // Fetch the latest data.
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
@@ -219,6 +217,7 @@
   };
 
   // TODO add saveSelectedCities function here
+  // Save list of cities to localStorage.
   app.saveSelectedCities = function() {
     var selectedCities = JSON.stringify(app.selectedCities);
     localStorage.selectedCities = selectedCities;
@@ -329,7 +328,18 @@
     }
   };
   // TODO uncomment line below to test app with fake data
-  app.updateForecastCard(initialWeatherForecast);
+  // app.updateForecastCard(initialWeatherForecast);
+
+  /************************************************************************
+   *
+   * Code required to start the app
+   *
+   * NOTE: To simplify this codelab, we've used localStorage.
+   *   localStorage is a synchronous API and has serious performance
+   *   implications. It should not be used in production applications!
+   *   Instead, check out IDB (https://www.npmjs.com/package/idb) or
+   *   SimpleDB (https://gist.github.com/inexorabletash/c8069c042b734519680c)
+   ************************************************************************/
 
   // TODO add startup code here
   app.selectedCities = localStorage.selectedCities;
@@ -352,11 +362,9 @@
   }
 
   // TODO add service worker code here
-
   if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-           .register('./service-worker.js')
-           .then(function() { console.log('Service Worker Registered'); });
+    navigator.serviceWorker
+             .register('./service-worker.js')
+             .then(function() { console.log('Service Worker Registered'); });
   }
-
 })();
