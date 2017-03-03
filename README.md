@@ -1,3 +1,13 @@
+# About
+
+My work during a [code along workshop](https://codelabs.developers.google.com/codelabs/your-first-pwapp/#0) as part of a Progressive Web Applications workshop in Cambridge, MA on March 3rd, 2017.
+
+[Live Demo](https://progressive-web-app-demo-4ab0b.firebaseapp.com/) (limited support in some browsers due to use of service workers)
+
+[Lighthouse](https://developers.google.com/web/tools/lighthouse/) for testing and scoring Progressive Web Apps
+
+Deploy with `firebase deploy`. If `firebase init` needs to be run, make sure to run it from the work directory, choose / instead of public for deploying, and do not overwrite the index.html
+
 # Your first Progressive Web App Code Lab
 
 These are the resource files needed for the [Your first Progressive Web App](https://codelabs.developers.google.com/codelabs/your-first-pwapp/)
